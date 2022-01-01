@@ -1,6 +1,9 @@
 # quora-plus-bypass
 A python script to extract answers to any question on Quora (Quora+ included) 
 
+### Requirements
+- Python 3.x
+
 ### Usage
 ```
 pip install -r requirements.txt
