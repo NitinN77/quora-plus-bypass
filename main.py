@@ -18,8 +18,13 @@ def fetch_answers(my_url):
     f.close()
 
     with open("buffer.json") as f:
-        data = json.loads(f.read())["mainEntity"]["suggestedAnswer"]
-        answers = [x["text"] for x in data]
+        data = json.loads(f.read())
+        answers = []
+        try:
+            answers += [x["text"] for x in data["mainEntity"]["acceptedAnswer"]]
+        except:
+            pass
+        answers += [x["text"] for x in data["mainEntity"]["suggestedAnswer"]]
         for i in range(len(answers)):
             print(f"\n\n\n\n Answers #{i+1}\n\n")
             print(answers[i])
