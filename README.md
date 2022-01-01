@@ -1,5 +1,5 @@
 # quora-plus-bypass
-A python script to extract answers for any question on Quora (Quora+ included) 
+A python script to extract answers to any question on Quora (Quora+ included) 
 
 ### Usage
 ```
