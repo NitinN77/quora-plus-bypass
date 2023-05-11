@@ -1,5 +1,6 @@
 import json
 import sys
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup as Soup
@@ -23,13 +24,23 @@ def fetch_answers(my_url):
         print(answers[i])
     try:
         if "-txt" in sys.argv:
-            with open(r"answers\answer.txt", "a", newline="") as f:
+            with open(
+                rf"answers\{datetime.now().strftime('%H%M_%Y%m%d')}.txt",
+                "a+",
+                newline="",
+                encoding="UTF-8",
+            ) as f:
                 for answer in answers:
                     f.write(answer)
                     f.write("\n\n\n\n\n\n")
 
         if "-json" in sys.argv:
-            with open(r"answers\answers.json", "a", newline="") as f:
+            with open(
+                rf"answers\{datetime.now().strftime('%H%M_%Y%m%d')}.json",
+                "a+",
+                newline="",
+                encoding="UTF-8",
+            ) as f:
                 answers_json = {i + 1: answers[i] for i in range(len(answers))}
                 json.dump(answers_json, f)
     except IOError:
@@ -38,6 +49,6 @@ def fetch_answers(my_url):
 
 if __name__ == "__main__":
     try:
-        fetch_answers(sys.argv)
-    except:
+        fetch_answers(sys.argv[1])
+    except (IndexError, requests.exceptions.MissingSchema):
         print("Missing required argument: url")
